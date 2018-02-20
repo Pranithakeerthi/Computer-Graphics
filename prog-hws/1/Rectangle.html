@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+
+<head>
+
+<title>
+  Rectangle
+</title>
+
+<style> 
+form {
+font-size:100%;
+color:black;
+text-align:center
+}
+</style>
+
+</head>
+
+<body style="background-color:#AF7AC5;">
+
+<h1 style="font-size:200%;color:black;text-align:center;">RECTANGLE</h1>
+
+<form action="rect">
+
+  <b> X: </b> <input type="text" id="X" >
+  <b> Y: </b> <input type="text" id="Y"><br>
+  <br>
+  <b> Height: </b> <input type="text" id="h" >
+  <b> Width: </b> <input type="text" id="w" ><br>
+  <br>
+  <b> Thickness: </b> <select id="thick">
+      <option value="2"> Default </option>
+      <option value="4"> 4 </option>
+      <option value="6"> 6 </option>
+      <option value="8"> 8 </option>
+      <option value="10"> 10 </option>
+      <option value="12"> 12 </option>
+      <option value="14"> 14 </option>
+      <option value="16"> 16 </option>
+      <option value="18"> 18 </option>
+      <option value="20"> 20 </option>
+  </select>
+<b> Border color: </b> <select id="color">
+      <option value="#000000"> Default </option>
+      <option value="#FF0000"> Red </option>
+      <option value="#FFFF00"> Yellow </option>
+      <option value="#F39C12"> Orange </option>
+      <option value="#3498DB"> Blue </option>
+      <option value="#839192"> Grey </option>
+      <option value="#800000"> Maroon </option>
+      <option value="#27AE60"> Green </option>
+   </select>
+<br> <br> 
+  <strong> <input type="button" value="DRAW" onclick="rect()" style="font-size:100%;color:black;"> </strong>
+  <strong> <input type="button" value="CLEAR" onclick="clr()"style="font-size:100%;color:black;"></strong>
+
+</form>
+
+<canvas id="myCanvas" width="1360" height="450" style="border:5px solid #000000;margin:100px; background-color:lightyellow;">
+</canvas>
+
+<script>
+
+var canvas=document.getElementById("myCanvas");
+var c= canvas.getContext('2d');
+
+function rect() {
+
+var x=document.getElementById("X").value;
+var y=document.getElementById("Y").value;
+var h=document.getElementById("h").value;
+var w=document.getElementById("w").value;
+
+c.strokeStyle=document.getElementById("color").value;
+c.rect(x,y,w,h);
+c.stroke();
+c.lineWidth=document.getElementById("thick").value;
+}
+
+function clr() {
+
+c.clearRect(0,0,myCanvas.width,myCanvas.height);
+}
+
+</script>
+
+</body>
+
+</html>
+
