@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+
+ <head>
+
+  <title>
+ Line Rubberbanding
+  </title>
+
+<style>
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 770px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 720;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a white background color */
+
+.container:hover input ~ .checkmark {
+    background-color: #FADBD8;
+}
+
+/* When the radio button is checked, add a red background */
+
+.container input:checked ~ .checkmark {
+    background-color: #A93226;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+</style>
+
+ </head>
+
+ <body style="background-color:#AF7AC5;">
+
+<h1 style="font-size:200%;color:black;text-align:center;">  LINE RUBBERBANDING</h1>
+
+<form style="font-size:150%;color:black;text-align:center;">
+
+ <b> Thickness: </b> <select id="thick">
+      <option value="2"> Default </option>
+      <option value="4"> 4 </option>
+      <option value="6"> 6 </option>
+      <option value="8"> 8 </option>
+      <option value="10"> 10 </option>
+      <option value="12"> 12 </option>
+      <option value="14"> 14 </option>
+      <option value="16"> 16 </option>
+      <option value="18"> 18 </option>
+      <option value="20"> 20 </option>
+  </select>
+
+<b> Border color: </b> <select id="color">
+      <option value="#000000"> Default </option>
+      <option value="#FF0000"> Red </option>
+      <option value="#FFFF00"> Yellow </option>
+      <option value="#F39C12"> Orange </option>
+      <option value="#3498DB"> Blue </option>
+      <option value="#839192"> Grey </option>
+      <option value="#800000"> Maroon </option>
+      <option value="#27AE60"> Green </option>
+   </select>
+</form>
+
+
+<canvas id="myCanvas" width="1360" height="450" style="border:5px solid #000000;margin:100px; background-color:lightyellow;" >
+</canvas>
+
+<h2 id="type" > 0 | 0 </h2>
+
+<script>
+
+var canvas,
+    context,
+    dragging = false,
+    dragStartLocation,
+    snapshot,
+    x,y, position;
+    
+Line();
+function getCanvasCoordinates(event) {
+    x = event.clientX - canvas.getBoundingClientRect().left,
+    y = event.clientY - canvas.getBoundingClientRect().top;
+    return {x: x, y: y};
+}
+
+function takeSnapshot() {
+    snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function restoreSnapshot() {
+    context.putImageData(snapshot, 0, 0);
+}
+
+
+function Line() {
+    canvas = document.getElementById("myCanvas");
+    context = canvas.getContext('2d');
+    // context.lineCap = 'round';
+
+    canvas.addEventListener('mousedown', dragStart, false);
+    canvas.addEventListener('mousemove', drag, false);
+    canvas.addEventListener('mouseup', dragStop, false);
+}
+
+
+function dragStart(event) {
+dragging = true;
+    dragStartLocation = getCanvasCoordinates(event);
+    context.fillRect(x,y,5,5)
+    takeSnapshot();
+}
+
+function drag(event) {
+    if (dragging === true) {
+        restoreSnapshot();
+        position = getCanvasCoordinates(event);
+
+        drawLine(dragStartLocation.x,dragStartLocation.y,position.x,position.y);
+    }
+}
+
+function dragStop(event) {
+    dragging = false;
+    restoreSnapshot();
+    var position = getCanvasCoordinates(event);
+    drawLine(dragStartLocation.x,dragStartLocation.y,position.x,position.y);
+
+}
+
+function drawLine(x0,y0,x1,y1) {
+context.clearRect(0,0,myCanvas.width,myCanvas.height);
+canvas.width=canvas.width;
+context.fill();
+
+   // context.clearRect(0,0,myCanvas.width,myCanvas.height);
+var fx =  Math.abs(x1-x0), gx = x0<x1 ? 1 : -1;
+   var fy = -Math.abs(y1-y0), gy = y0<y1 ? 1 : -1;
+   var error = fx+fy, e1;                                   
+
+   for (;;){
+
+context.fillStyle=document.getElementById("color").value;
+context.fillRect(x0,y0,document.getElementById("thick").value,document.getElementById("thick").value);
+
+                                                     
+      if (x0 == x1 && y0 == y1) break;
+      e1 = 2*error;
+      if (e1 >= fy) { error += fy; x0 += gx; }                        
+      if (e1 <= fx) { error += fx; y0 += gy; }                        
+   }
+
+   }
+
+</script>
+
+</body>
+
+</html>
+
