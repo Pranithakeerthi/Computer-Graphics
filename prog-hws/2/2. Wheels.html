@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+
+ <head>
+
+  <title>
+  Wheels
+  </title>
+
+</head>
+
+ <body background="948566.jpg">
+
+<h1 style="font-size:300%;color:black;text-align:center;"> WHEELS FOR DRIVERS</h1>
+
+<form style="font-size:180%;color:black;text-align:center;">
+
+<b> X: </b> <input type="text" id="X" >
+  <b> Y: </b> <input type="text" id="Y"><br>
+  <br>
+<b> Enter the radius of the wheel: </b> <input type="text" id="radius" >
+<b> Enter driver's score: </b> <input type="text" id="score" >
+<br/><br/>
+<b> Thickness: </b> <select id="thick">
+      <option value="2"> Default </option>
+      <option value="4"> 4 </option>
+      <option value="6"> 6 </option>
+      <option value="8"> 8 </option>
+      <option value="10"> 10 </option>
+      <option value="12"> 12 </option>
+      <option value="14"> 14 </option>
+      <option value="16"> 16 </option>
+      <option value="18"> 18 </option>
+      <option value="20"> 20 </option>
+  </select>
+
+<b> Border color: </b> <select id="color">
+      <option value="#000000"> Default </option>
+      <option value="#FF0000"> Red </option>
+      <option value="#FFFF00"> Yellow </option>
+      <option value="#F39C12"> Orange </option>
+      <option value="#3498DB"> Blue </option>
+      <option value="#839192"> Grey </option>
+      <option value="#800000"> Maroon </option>
+      <option value="#27AE60"> Green </option>
+   </select><br><br>
+<strong> <input type="button" value="DRAW" onclick="view()" style="font-size:80%;color:black;"> </strong>
+<strong> <input type="button" value="CLEAR" onclick="clr()"style="font-size:80%;color:black;"></strong></form>
+<canvas id="myCanvas" width="1660" height="900" style="border:5px solid #000000;margin:100px; background-color:lightyellow;" >
+</canvas>
+
+<script>
+
+var canvas=document.getElementById("myCanvas");
+var c= canvas.getContext('2d');
+
+function view() {
+
+c.clearRect(0,0,myCanvas.width,myCanvas.height);
+
+var x=document.getElementById("X").value;
+var y=document.getElementById("Y").value;
+var radius=document.getElementById("radius").value;
+var score=document.getElementById("score").value;
+
+if(score==100)
+{
+    c.beginPath();
+    c.arc(x, y, radius, 0, Math.PI * 2);
+    c.stroke();
+    c.beginPath();
+    c.arc(x, y, radius/2, 0, Math.PI * 2);
+    c.stroke();
+    c.beginPath();
+    c.arc(x, y, radius/4, 0, Math.PI * 2); 
+    c.lineWidth=document.getElementById("thick").value;
+    c.strokeStyle=document.getElementById("color").value;
+    c.stroke();
+}
+
+else if(score<100 && score>=80)
+{
+var d=100-score;
+var radius1=radius-((d*radius)/100);
+c.beginPath();
+c.ellipse(x,y,radius,radius1,0, 0, 2 * Math.PI);
+c.ellipse(x,y,radius/2,radius1/2,0, 0, 2 * Math.PI);
+c.ellipse(x,y,radius/4,radius1/4,0, 0, 2 * Math.PI);
+c.lineWidth=document.getElementById("thick").value;
+c.strokeStyle=document.getElementById("color").value;
+c.stroke();
+}
+
+else if(score>=4 && score<=79)
+{
+var numSides = score;
+var xCenter = parseInt(x);
+var yCenter = parseInt(y);
+c.clearRect(0,0,canvas.width,canvas.height);
+c.beginPath();
+var xPos = xCenter + radius * Math.cos(2 * Math.PI * 0 / numSides);
+var yPos = yCenter + radius * Math.sin(2 * Math.PI * 0 / numSides);
+c.moveTo(xPos,yPos);
+for (i = 1; i <= numSides; i++) {
+xPos = xCenter + radius * Math.cos(2 * Math.PI * i / numSides);
+yPos = yCenter + radius * Math.sin(2 * Math.PI * i / numSides);
+c.lineTo(xPos,yPos);
+}
+c.closePath();
+c.lineWidth=document.getElementById("thick").value;
+c.strokeStyle=document.getElementById("color").value;
+c.stroke();
+}
+
+else
+{
+alert("Driver's score shouldn't be less than 4");
+}
+
+}
+
+function clr() {
+c.clearRect(0,0,myCanvas.width,myCanvas.height);
+}
+
+</script>
+
+</body>
+</html>
