@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>
+  Week 1 
+  </title>
+
+</head>
+
+<body background="1.jpg" style="text-align:right;">
+
+<h1 style="font-size:300%;color:black;text-align:center;"> 2D Elevations: Front, Top, Side View Of House</h1>
+
+<strong> <a href="2. transform.html" style="font-size:25px;color:red;" >  Click Here: TRANSFORM OBJECT  </a></strong></hr>
+ 
+<div class"left" style="width:25%; float:left">
+
+<svg id ="mysvg" height="1000" width="1000">
+<text x="80" y="80" fill="BLACK" style="font-size:15px;">FRONT VIEW</text>
+<text x="350" y="80" fill="Black" style="font-size:15px;">SIDE VIEW</text>
+<text x="80" y="350" fill="Black" style="font-size:15px;">TOP VIEW</text>
+	
+<svg width="1000" height="1000">
+<rect x="116" y="134" width="30" height="37"
+style="fill:red;stroke:black;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.7" />
+<rect x="174" y="134" width="30" height="37"
+style="fill:red;stroke:black;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.7" />
+  
+<svg height="250" width="500">
+<circle cx="131" cy="153" r="13" stroke="black" stroke-width="1" fill="red" />
+<circle cx="135" cy="157" r="7" stroke="black" stroke-width="2" fill="black" />
+   
+<circle cx="189" cy="153" r="13" stroke="black" stroke-width="1" fill="red" />
+<circle cx="193" cy="157" r="7" stroke="black" stroke-width="2" fill="black" />
+	
+<path d="M 143 205 C 121 235, 195 241, 182 205" stroke-width="2" stroke="brown" fill="transparent"/>
+<line x1="143" y1="205" x2="182" y2="205" style="stroke:brown;stroke-width:2" />
+
+<rect x="145" y="207" width="5" height="7"
+  style="fill:brown;stroke:black;stroke-width:2;opacity:0.5" />
+  <rect x="157" y="207" width="5" height="7"
+  style="fill:red;stroke:black;stroke-width:2;opacity:0.5" />
+  <rect x="169" y="207" width="5" height="7"
+  style="fill:red;stroke:black;stroke-width:2;opacity:0.5" />
+  <rect x="150" y="220" width="5" height="7"
+  style="fill:red;stroke:black;stroke-width:2;opacity:0.5" />
+  <rect x="164" y="220" width="5" height="7"
+  style="fill:red;stroke:black;stroke-width:2;opacity:0.5" />
+  
+</svg> 
+</svg>
+
+<svg width="2000" height="1000">
+<rect x="445" y="70" width="150" height="72"
+style="fill:white;stroke:brown;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.9" />
+<rect x="471" y="142" width="100" height="110"
+style="fill:white;stroke:brown;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.9" />
+<rect x="488" y="49" width="67" height="20"
+style="fill:white;stroke:brown;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.9" />
+
+<rect x="482" y="159" width="30" height="37"
+style="fill:black;stroke:red;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.7" />
+<rect x="530" y="159" width="30" height="37"
+style="fill:black;stroke:red;stroke-width:3;fill-opacity:0.1;stroke-opacity:0.7" />
+ 
+<rect x="80" y="375" width="173" height="133"
+style="fill:white;stroke:brown;stroke-width:3;fill-opacity:0.1;stroke-opacity:1" />
+  
+<line x1="162" y1="509" x2="162" y2="375" style="stroke:brown;stroke-width:3" />
+  
+<rect x="192" y="422" width="30" height="37"
+style="fill:brown;stroke:red;stroke-width:3;fill-opacity:0.1;stroke-opacity:1" />
+  
+<path d="M10 10"/>
+</svg> 
+
+</div>
+<script>
+//For Drawing House
+drawLine(100,135,100,250);
+drawLine(221,252,98,252);
+drawLine(219,132,219,252);
+drawLine(163,82,240,150);
+drawLine(165,82,82,150);
+	
+//For drawing Chimney
+drawLine(185,50,185,101);
+drawLine(210,49,210,125);
+drawLine(212,49,183,49);
+
+function drawLine(x1,y1,x2,y2){
+var svg   = svg=document.getElementById("mysvg");
+var svgNS = svg.namespaceURI;
+var line = document.createElementNS(svgNS,'line');
+line.setAttribute('x1',x1);
+line.setAttribute('y1',y1);
+line.setAttribute('x2',x2);
+line.setAttribute('y2',y2);
+line.setAttribute('stroke','brown');
+line.setAttribute('stroke-width','3px');
+svg.appendChild(line);
+}
+</script>
+</body>
+</html>
